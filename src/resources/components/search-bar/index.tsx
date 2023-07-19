@@ -11,7 +11,9 @@ const SearchBar: React.FC = (): JSX.Element => {
   }
 
   useEffect(() => {
-    handleClick();
+    if (filterState.searchTerm.length !== 0) {
+      handleClick();
+    }
   }, [filterState.activeFilters]);
 
   return (
