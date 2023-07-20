@@ -2,7 +2,7 @@
 
 ### How to run:
 
-- Clone the repo
+- [Clone the repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 - After that run this command on your command line:
 
 ```
