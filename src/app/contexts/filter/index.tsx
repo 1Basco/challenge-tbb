@@ -48,21 +48,20 @@ export const FilterProvider: React.FC<FilterProviderOptions> = ({
   function filterProducts(): void {
     let filteredProducts: Array<IProduct> = [];
 
-    if (state.activeFilters.length > 0) {
+    const hasActiveFilters = state.activeFilters.length > 0;
+    const hasSearchTerm = state.searchTerm && state.searchTerm.trim() !== "";
+
+    if (hasActiveFilters) {
       filteredProducts = state.products.filter((product: IProduct) =>
         state.activeFilters.includes(product.category._id)
       );
 
-      if (state.searchTerm && state.searchTerm.trim() !== "") {
+      if (hasSearchTerm) {
         filteredProducts = termSearch(state.searchTerm, filteredProducts);
       }
     }
 
-    if (
-      state.searchTerm &&
-      state.searchTerm.trim() !== "" &&
-      state.activeFilters.length === 0
-    ) {
+    if (hasSearchTerm && !hasActiveFilters) {
       filteredProducts = termSearch(state.searchTerm, state.products);
     }
 
@@ -73,11 +72,11 @@ export const FilterProvider: React.FC<FilterProviderOptions> = ({
   }
 
   function termSearch(term: string, products: Array<IProduct>): IProduct[] {
-    const searchTermLC = term.trim().toLowerCase();
+    const searchTerm = term.trim().toLowerCase();
     const filteredProducts = products.filter(
       (product) =>
-        product.name.toLowerCase().includes(searchTermLC) ||
-        product.category.name.toLowerCase().includes(searchTermLC)
+        product.name.toLowerCase().includes(searchTerm) ||
+        product.category.name.toLowerCase().includes(searchTerm)
     );
 
     return filteredProducts;

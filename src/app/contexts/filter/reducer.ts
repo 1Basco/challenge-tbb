@@ -32,18 +32,18 @@ export const filterReducer = (prevState: any, action: any) => {
         activeFilters: action.payload,
       };
 
+    case FilterContextConstants.ADD_FILTERED_PRODUCTS:
+      return {
+        ...prevState,
+        filteredProducts: action.payload,
+      };
+
     case FilterContextConstants.CLEAR_FILTERS:
       return {
         ...prevState,
         activeFilters: [],
         filteredProducts: [],
         searchTerm: "",
-      };
-
-    case FilterContextConstants.ADD_FILTERED_PRODUCTS:
-      return {
-        ...prevState,
-        filteredProducts: action.payload,
       };
 
     default:

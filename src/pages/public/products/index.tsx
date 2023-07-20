@@ -12,15 +12,12 @@ export default function ProductsPage(): JSX.Element {
   const [searchIsEmpty, setSearchIsEmpty] = useState(false);
 
   useEffect(() => {
-    if (
+    const noResultsFound =
       filterState.filteredProducts.length === 0 &&
       (filterState.searchTerm.length > 0 ||
-        filterState.activeFilters.length > 0)
-    ) {
-      setSearchIsEmpty(true);
-    } else {
-      setSearchIsEmpty(false);
-    }
+        filterState.activeFilters.length > 0);
+
+    setSearchIsEmpty(noResultsFound);
   }, [filterState.filteredProducts, filterState.searchTerm]);
 
   return (

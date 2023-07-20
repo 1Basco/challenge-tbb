@@ -16,6 +16,12 @@ const SearchBar: React.FC = (): JSX.Element => {
     }
   }, [filterState.activeFilters]);
 
+  useEffect(() => {
+    if (inputRef.current && filterState.searchTerm.length === 0) {
+      inputRef.current.value = "";
+    }
+  }, [filterState.searchTerm]);
+
   return (
     <div className="flex items-center bg-neutral-500 rounded-lg shadow-md border border-neutral-400">
       <input
